@@ -47,10 +47,9 @@ export default class Ifsc extends React.Component {
           })
           .then((response) => {
             // this.state.bankDetails = response.data;
-            console.log("data", response);
-            var pt  = response.data.indexOf("No data");
-            if(pt==-1) {
+            if(response.data.length>0 && response.data[0].address===undefined) {
                 console.log("data noyt found");
+                this.clearClick();
                 alert("No data found!Please use bankDetails service to get persisted bank details and then try ifsc.Database has been trimmed on server due to limited space");
             } else {
                 this.setState({ bankDetails: response.data[0]});
@@ -61,6 +60,7 @@ export default class Ifsc extends React.Component {
           .catch((error)  => {
             console.log('Error', error);
             // alert("Not Found");
+            alert("Error Occurred!");
           });
 
     }

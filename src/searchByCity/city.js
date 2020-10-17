@@ -39,6 +39,7 @@ export default class City extends React.Component {
             // this.state.bankDetails = response.data;
             if(response.data==="No data found!Database has been trimmed due to limited space on server") {
                 alert("No data found!Database has been trimmed due to limited space on server");
+                this.clearClick();
             } else {
                 this.setState({ bankDetails: response.data});
                 console.log('city', this.state);
@@ -47,7 +48,7 @@ export default class City extends React.Component {
           })
           .catch((error)  => {
             console.log('Error', error);
-            // alert("Not Found");
+            alert("Error Occurred!");
           });
 
     }
