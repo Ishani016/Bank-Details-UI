@@ -3,6 +3,7 @@ import { Component} from 'react';
 import { Navbar, Nav, Button} from 'react-bootstrap';
 
 function Navigation() {
+    //this is used to create navbar that contains tabs for Home, Ifsc, City and Fixed Deposit. This navbar allows us to navigate to the respective pages 
     return (
         <Navbar bg="dark" variant="dark">
             <Navbar.Brand>Welcome to BankAdda!</Navbar.Brand>

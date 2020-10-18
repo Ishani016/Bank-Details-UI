@@ -18,7 +18,7 @@ import {
 } from "react-router-dom";
 import FixedDeposit from './fixedDepost/fd';
 
-
+//when the following endpoints are called, there corresponding components are invoked. For example, if '/ifsc' is called, 'Ifsc' Component where we have written the logic for getting data by ifsc is called 
 ReactDOM.render((
   <Router>
     <Switch>
@@ -28,16 +28,6 @@ ReactDOM.render((
       <Route exact path="/fd" component={FixedDeposit} />
     </Switch>
   </Router>
-  // <Router history = {browserHistory}>
-  //     <Route path = "/" component = {App}>
-  //        {/* <IndexRoute component = {Home} /> */}
-  //        <Route path="city" component={ City } />
-  //        <Route path = "ifsc" component = {Ifsc} />
-  //     </Route>
-  //  </Router>
-  // {/* <React.StrictMode>
-  //   <App />
-  // </React.StrictMode> */}
   ),
   
   document.getElementById('root')

@@ -17,7 +17,9 @@ export default class Ifsc extends React.Component {
         super(props);
         
         this.handleClick = this.handleClick.bind(this);
+        //creating variable to get input data
         this.textInput = React.createRef(); 
+        //creating state for the data that will be received in response 
         this.state = {
             bankDetails: {
               address: '',
@@ -40,24 +42,28 @@ export default class Ifsc extends React.Component {
 
     }
 
+    //this method called when Submit button is clicked after entering city and bank name
     handleClick = () => {
         console.log("I have been clicked", this.textInput.current.value, this.textInput.current.value.length);
         axios.post('https://cors-anywhere.herokuapp.com/https://aqueou016s.herokuapp.com/ifsc', {
             ifsc: this.textInput.current.value,
           })
           .then((response) => {
-            // this.state.bankDetails = response.data;
+            // if data is not found, then a message is displayed that data is not present in database
             if(response.data.length>0 && response.data[0].address===undefined) {
                 console.log("data not found");
+                //existing data for previous serach is cleared if the message for data not found is displayed
                 this.clearClick();
                 alert("No data found!Please use bankDetails service to get persisted bank details and then try ifsc.Database has been trimmed on server due to limited space");
             } else {
+                //data received as response is populated in the state
                 this.setState({ bankDetails: response.data[0]});
                 console.log('bank', this.state);
                 // this.setState({ tableData: response.data.tableData });
             }
           })
           .catch((error)  => {
+            //in case of any error such as network error, Error message is displayed
             console.log('Error', error);
             // alert("Not Found");
             alert("Error Occurred!");
@@ -65,6 +71,7 @@ export default class Ifsc extends React.Component {
 
     }
 
+    //clears the data when Clear button is clicked
     clearClick = () => {
         this.setState({bankDetails: {
             address: '',
@@ -78,6 +85,8 @@ export default class Ifsc extends React.Component {
           }});
         this.textInput.current.value = '';
     }
+
+    //responsble for creating form for entering the ifsc and also creating table 
     render() {
         return(
             <div>

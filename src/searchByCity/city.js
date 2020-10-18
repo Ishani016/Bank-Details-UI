@@ -13,8 +13,11 @@ export default class City extends React.Component {
         super(props);
         
         this.handleClick = this.handleClick.bind(this);
+
+        //creating variables to get input data
         this.cityTextInput = React.createRef(); 
         this.nameTextInput = React.createRef(); 
+        //creating state for the data that will be received in response 
         this.state = {
             bankDetails: [{
               address: '',
@@ -29,30 +32,34 @@ export default class City extends React.Component {
         }
     }
 
+    //method called when Submit button is clicked after entering city and bank name
     handleClick = () => {
-        // console.log("I have been clicked", this.textInput.current.value, this.textInput.current.value.length);
         axios.post('https://cors-anywhere.herokuapp.com/https://aqueou016s.herokuapp.com/bankDetails', {
             city: this.cityTextInput.current.value,
             bank: this.nameTextInput.current.value,
           })
           .then((response) => {
-            // this.state.bankDetails = response.data;
+              //if data is not found, then a message is displayed that data is not present in database
             if(response.data==="No data found!Database has been trimmed due to limited space on server") {
                 alert("No data found!Database has been trimmed due to limited space on server");
+                //existing data for previous serach is cleared if the message for data not found is displayed
                 this.clearClick();
             } else {
+                //data received as response is populated in the state
                 this.setState({ bankDetails: response.data});
                 console.log('city', this.state);
                 // this.setState({ tableData: response.data.tableData });
             }
           })
           .catch((error)  => {
+              //in case of any error such as network error, Error message is displayed
             console.log('Error', error);
             alert("Error Occurred!");
           });
 
     }
 
+    //clears the data when Clear button is clicked
     clearClick = () => {
         this.setState({bankDetails: [{
             address: '',
@@ -67,7 +74,8 @@ export default class City extends React.Component {
         this.cityTextInput.current.value = '';
         this.nameTextInput.current.value = '';
     }
-      
+
+    //When response of the city and bank name is returned, this method is used to create dynamic rows. The number of rows created is equal to the length of array returned in response. 
     renderData(item, index) {
         if(item.length ==0) {
             return "No data found";
@@ -85,6 +93,7 @@ export default class City extends React.Component {
         )
       }
 
+    //responsble for creating form for entering the city and bank name and also creating table 
     render() {
         return(
             <div>

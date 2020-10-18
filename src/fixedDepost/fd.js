@@ -11,12 +11,15 @@ export default class FixedDeposit extends React.Component {
         super(props);
         
         this.handleClick = this.handleClick.bind(this);
+
+        //creating variables to get input data
         this.amountInput = React.createRef(); 
         this.rateInput = React.createRef(); 
         this.timeInput = React.createRef(); 
         this.totalOutput = React.createRef(); 
     }
 
+    //this method is called when Calculate button is clicked
     handleClick = () => {
         var amount  = this.amountInput.current.value;
         var rate = this.rateInput.current.value;
@@ -26,12 +29,14 @@ export default class FixedDeposit extends React.Component {
         this.totalOutput.current.value = total;
     }
 
+    //clears the data when Clear button is clicked
     clearClick = () => {
         this.totalOutput.current.value = '';
         this.amountInput.current.value = '';
         this.rateInput.current.value = '';
         this.timeInput.current.value = '';
     }
+    //responsble for creating form for entering the rate, year and principal and also displaying the result
     render() {
         return(
             <div>
